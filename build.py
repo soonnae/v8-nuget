@@ -119,7 +119,7 @@ print('Fetching v8')
 subprocess.check_call([os.path.join('depot_tools', 'gclient'), 'sync',
 	'--no-history', '--shallow', '--delete_unversioned_trees', '--reset',
 	'--gclientfile=v8.gclient', '--revision=' + args.V8_VERSION],
-	env=env, shell=True)
+	env=env)
 
 
 ### Get actual v8 version from defines in v8-version.h
@@ -192,8 +192,8 @@ def build(target, options, work_dir, out_dir, env):
 	gn = os.path.join(os.getcwd(), 'v8', 'buildtools', 'win', 'gn.exe')
 	ninja = os.path.join(os.getcwd(), 'v8', 'third_party', 'ninja', 'ninja.exe')
 
-	subprocess.check_call([gn, 'gen', out_dir, '--args=' + ' '.join(gn_args).lower()], cwd=work_dir, env=env, shell=True)
-	subprocess.check_call([ninja, '-C', out_dir, target], cwd=work_dir, env=env, shell=True)
+	subprocess.check_call([gn, 'gen', out_dir, '--args=' + ' '.join(gn_args).lower()], cwd=work_dir, env=env)
+	subprocess.check_call([ninja, '-C', out_dir, target], cwd=work_dir, env=env)
 
 
 def generate_abseil_exports(options, out_dir, env):
